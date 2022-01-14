@@ -1,25 +1,23 @@
 class Solution {
 public:
     vector<int> partitionLabels(string s) {
-        map<char,int> rm;
+        vector<int> rm(26,-1);
        
         for(int i=s.length()-1; i>=0; i--){
-            if(rm.find(s[i]) == rm.end()) rm.insert(pair<char,int>(s[i],i));
+            if(rm[s[i]-'a'] == -1) rm[s[i]-'a'] = i;
         }
         
         vector<int> result;
-        int l=0, j=rm.find(s[0])->second;
+        int l=0, j=0;
         
         for(int i=0; i<s.length();i++){
             
-            j = max(j,rm.find(s[i])->second);
+            j = max(j,rm[s[i]-'a']);
             
             if(i==j){
                 result.push_back(j-l+1);
                 l = i+1;
             }
-            
-            map<char,int>::iterator fd = rm.find(s[i]);
             
         }
         return result;
