@@ -11,17 +11,22 @@ public:
         int l=0, j=rm.find(s[0])->second;
         
         for(int i=0; i<s.length();i++){
+            if(j==s.length()-1){
+                result.push_back(j-l+1);
+                break;
+            }
+            
             if(i==j){
                 result.push_back(j-l+1);
                 l = i+1;
-                if(l!=s.length()) j = rm.find(s[l])->second;
-                else break;
+                j = rm.find(s[l])->second;
             }
+            
             map<char,int>::iterator fd = rm.find(s[i]);
             
-            if(fd->second>j){
+            if(fd->second>j)
                 j = fd->second;
-            }
+            
             
         }
         return result;
