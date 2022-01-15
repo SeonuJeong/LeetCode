@@ -9,13 +9,13 @@ public:
                 ri--;
             else if(sum<target)
                 le++;
-            else
-                break;
+            else{
+                result.push_back(le+1);
+                result.push_back(ri+1);
+                return result;
+            }
         }
-        
-        result.push_back(le+1);
-        result.push_back(ri+1);
-        
+     
         return result;
     }
 };
