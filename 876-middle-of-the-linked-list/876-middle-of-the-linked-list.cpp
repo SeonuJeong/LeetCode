@@ -10,7 +10,8 @@
  */
 class Solution {
 public:
-    ListNode* result=NULL;
+    //Solution1 O(2n)
+    /*ListNode* result=NULL;
     ListNode* middleNode(ListNode* head) {
         Func(head,0);
         
@@ -31,5 +32,22 @@ public:
         
         return tmp+1;
         
+    }*/
+    
+    //Solution2 O(n)
+    ListNode* middleNode(ListNode* head) {
+        ListNode* node = head;
+        int count=0;
+        while(node!=NULL){
+            count++;
+            node = node->next;
+        }
+        
+        node=head;
+        for(int i=0; i<(count/2); i++){
+                node=node->next;
+        }
+        
+        return node;
     }
 };
