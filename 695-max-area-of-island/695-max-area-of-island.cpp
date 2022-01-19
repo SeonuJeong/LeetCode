@@ -1,10 +1,10 @@
 class Solution {
 public:
-    vector<vector<int>> visited;
+    vector<vector<bool>> visited;
     int delta[4][2] = {{1,0},{-1,0},{0,1},{0,-1}};
     int maxAreaOfIsland(vector<vector<int>>& grid) {
         int m = grid.size(); int n = grid[0].size();
-        visited.assign(m,vector<int>(n,0));
+        visited.assign(m,vector<bool>(n,0));
         int area=0;
         
         for(int i=0; i<m ; i++)
