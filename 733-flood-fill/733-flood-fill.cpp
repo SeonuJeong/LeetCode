@@ -1,10 +1,9 @@
 class Solution {
 public:
    
-    int delta[4][2] = {{1,0},{-1,0},{0,-1},{0,1}};//up,down,left,right
     vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
-        
-        dfs(image,sr,sc,newColor,image[sr][sc]);
+        int val = image[sr][sc];
+        dfs(image,sr,sc,newColor,val);
         
         return image;
     }
