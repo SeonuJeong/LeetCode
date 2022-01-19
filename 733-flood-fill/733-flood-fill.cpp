@@ -15,9 +15,11 @@ public:
             return;
         
         image[row][col] = newColor;
-        for(int i=0;i<4;i++){
-            floodFill(image,row+delta[i][0],col+delta[i][1],newColor,value);
-        }
+        
+        floodFill(image,row+1,col+0,newColor,value);
+        floodFill(image,row-1,col+0,newColor,value);
+        floodFill(image,row+0,col+1,newColor,value);
+        floodFill(image,row+0,col-1,newColor,value);
         
     }
     
