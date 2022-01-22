@@ -12,13 +12,12 @@ class Solution {
 public:
     ListNode * result;
     ListNode* reverseList(ListNode* head) {
-        
+        if(head==NULL)return head;
         reverse(head);
         return result;
     }
     
     ListNode* reverse(ListNode* head) {
-        if(head==NULL)return head;
         
         if(head->next==NULL){ result=head; return head;}
 
