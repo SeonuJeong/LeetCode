@@ -1,27 +1,24 @@
 class Solution {
 public:
-    vector<int> cache;
-    vector<int> _nums;
+    
+    vector<int> dp;
     int rob(vector<int>& nums) {
-        cache.assign(nums.size(),-1);
-        _nums = nums;
+        dp.assign(100,0);
         
-        return func(nums.size()-1);
+        if(nums.size()==1)
+            return nums[0];
+        if(nums.size()==2)
+            return max(nums[0], nums[1]);
+        
+        dp[0] = nums[0];
+        dp[1] = max(nums[0], nums[1]);
+        
+        for(int i=2; i<nums.size();i++){
+            dp[i] = max(dp[i-1], dp[i-2]+nums[i]);
+        }
+            
+        return dp[nums.size()-1];
     }
     
-    int func(int house){
-        
-        if(house==1)
-            return max(_nums[1],_nums[0]);
-        if(house==0)
-            return _nums[0];
-        
-        if(cache[house]!=-1)
-            return cache[house];
-        
-        cache[house] = max(func(house-1), func(house-2)+_nums[house]);
-        
-        return cache[house];
-        
-    }
+  
 };
