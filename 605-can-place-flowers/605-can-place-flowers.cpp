@@ -13,9 +13,11 @@ public:
         }
         
         
+        
+        
         for(int i=1; i<flowerbed.size();i++){
             
-            if(i+1 ==flowerbed.size()){
+            /*if(i+1 ==flowerbed.size()){
                 if(flowerbed[i-1]==0 && flowerbed[i]==0) dp[i] = dp[i-1]+1;
                 else dp[i] = dp[i-1];
                 continue;
@@ -24,6 +26,13 @@ public:
             
             if(flowerbed[i+1]==0 && flowerbed[i-1]==0 && flowerbed[i]==0){
                 dp[i] = dp[i-1]+1;
+                flowerbed[i] = 1;
+            }
+            else
+                dp[i] = dp[i-1];*/
+            
+            if(flowerbed[i]==0 && (i==0||flowerbed[i-1]==0) && (i==flowerbed.size()-1||flowerbed[i+1]==0)){
+                dp[i] = dp[i-1] + 1;
                 flowerbed[i] = 1;
             }
             else
