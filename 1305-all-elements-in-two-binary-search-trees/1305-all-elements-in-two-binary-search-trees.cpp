@@ -16,22 +16,10 @@ public:
     
         queue<TreeNode*> que;
         
-        // root1
+        // root1 & roo2
         if(root1!=NULL)
             que.push(root1);
         
-        while(!que.empty()){
-            
-            TreeNode* tmp = que.front();
-            que.pop();
-            pq.push(tmp->val);
-            
-            if(tmp->left!=NULL) que.push(tmp->left);
-            if(tmp->right!=NULL) que.push(tmp->right);                
-            
-        }
-        
-        //root2
         if(root2!=NULL)
             que.push(root2);
         
