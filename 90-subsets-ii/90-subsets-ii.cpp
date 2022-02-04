@@ -1,53 +1,49 @@
 class Solution {
 public:
-    //10:07
-    vector<int> nums;
-    vector<vector<int>> result;
-    vector<vector<int>> before;
-    
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
         sort(nums.begin(), nums.end());
-        this->nums = nums;
-        dfs(0);
-        result.push_back(vector<int>(0));
-        return result;
-    }
-    
-    void dfs(int i){
         
-        if(i==nums.size()-1){
-            result.push_back(vector<int>(1,nums[i]));
-            before.push_back(vector<int>(1,nums[i]));
-            return;
-        }
+        vector<vector<int>> output;
         
-        dfs(i+1);
+        output.push_back(vector<int>(0));
+        output.push_back(vector<int>(1,nums[0]));
         
-        if(nums[i] != nums[i+1]){
-            before.clear();
-            int size = result.size();        
-            for(int j=0; j<size; j++){
-                vector<int> tmp = result[j];
-                tmp.push_back(nums[i]);
-                result.push_back(tmp);
-                before.push_back(tmp);
-            }
+        vector<vector<int>> before;
+        before.push_back(vector<int>(1,nums[0]));
         
-            result.push_back(vector<int>(1,nums[i]));
-            before.push_back(vector<int>(1,nums[i]));
-        }
-        else{
+        
+        for(int i=1; i<nums.size(); i++){
+            if(nums[i] == nums[i-1]){
+                vector<vector<int>> tmp;
+                
+                for(vector<int> cur : before){
+                    cur.push_back(nums[i]);
+                    output.push_back(cur);
+                    tmp.push_back(cur);
+                }
+                
+                before.clear();
+                for(vector<int> cur : tmp){
+                    before.push_back(cur);
+                }
             
-            int size = before.size();        
-            for(int j=0; j<size; j++){
-                vector<int> tmp = before[j];
-                tmp.push_back(nums[i]);
-                result.push_back(tmp);
-                before.push_back(tmp);
             }
-            before.erase(before.begin(),before.begin()+size);
+            else{
+                before.clear();
+                vector<vector<int>> subset;
+                for(vector<int> cur : output){
+                    cur.push_back(nums[i]);
+                    subset.push_back(cur);
+                    before.push_back(cur);
+                }
+            
+                for(vector<int> cur : subset){
+                    output.push_back(cur);
+                }
+            }
         }
         
-        return;
+        
+        return output;
     }
 };
