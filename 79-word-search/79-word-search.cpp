@@ -1,6 +1,7 @@
 class Solution {
 public:
     // 06:21
+    // 06:39
     vector<vector<bool>> visited;
     string word;
     vector<vector<char>> board;
