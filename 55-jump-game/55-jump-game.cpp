@@ -1,39 +1,26 @@
 class Solution {
 public:
     //03:44
-    //03:58
-    vector<int> cache;
-    int N;
-    vector<int> nums;
     bool canJump(vector<int>& nums) {
-        cache.assign(nums.size(),-1);
-        N = nums.size();
-        this->nums = nums;
+        int last=nums.size()-1;
+        int index=last-1;
         
-        return dp(0);
-    }
-    
-    bool dp(int index){
+        if(last==0)return true;
         
-        if(index>=N-1){
-            return true;
-        }
-        
-        if(cache[index]!=-1)
-            return cache[index];
-        
-        bool result=false;
-        for(int i=nums[index]; i>0; i--){
-            if(dp(index+i)){
-                result = true;
-                break;
+        while(index>=0){
+            
+            if(nums[index]>= last-index){ // can reach last index
+                last = index;
+                index = index-1;
             }
+            else{ // can't reach last index
+                index = index-1;
+            }
+            
         }
         
-        if(result==true) cache[index] = 1;
-        else cache[index] = 0;
-        
-        return result;
+        if(last==0) return true;
+        else return false;
         
     }
 };
