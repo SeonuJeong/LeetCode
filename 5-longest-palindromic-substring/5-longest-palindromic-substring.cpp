@@ -1,11 +1,11 @@
 class Solution {
 public:
     // 05:01
-    
+    // 06:16
     vector<vector<int>> cache;
     string s;
     string output="";
-    
+    int longlen=0;
     string longestPalindrome(string s) {
         cache.assign(s.length(), vector<int>(s.length(),0));
         this->s = s;
@@ -36,7 +36,7 @@ public:
         }
         
         int result=-1;
-        for(int i=left; i<right; i++){
+        for(int i=left; i<right-longlen; i++){
             if(s[i]==s[right]){
                 if(dp2(i+1, right-1)>0){
                     result= right-i+1;
