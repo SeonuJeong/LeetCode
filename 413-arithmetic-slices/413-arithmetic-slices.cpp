@@ -1,6 +1,7 @@
 class Solution {
 public:
     // 06:26
+    // 06:57
     int numberOfArithmeticSlices(vector<int>& nums) {
         if(nums.size()<3) return 0;
         
