@@ -36,12 +36,14 @@ public:
         }
         
         int result=-1;
-        for(int i=left; i<right-longlen; i++){
+        for(int i=left; i<=right-longlen; i++){
             if(s[i]==s[right]){
                 if(dp2(i+1, right-1)>0){
                     result= right-i+1;
-                    if(output.length() < s.substr(i,right-i+1).length())
+                    if(output.length() < s.substr(i,right-i+1).length()){
                         output = s.substr(i,right-i+1);
+                        longlen = output.length();
+                    }
                     break;
                 }
             }
