@@ -20,7 +20,7 @@ public:
             return cache[n];
         
         int result = 0;
-        for(int i=1; i<n; i++){
+        for(int i=1; i<=(n/2); i++){
             int tmp = max(i*(n-i) , i*dp(n-i));
             result = max(result, tmp);
         }
