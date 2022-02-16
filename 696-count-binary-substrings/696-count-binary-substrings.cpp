@@ -1,6 +1,7 @@
 class Solution {
 public:
     //08:30
+    //08:53
     int countBinarySubstrings(string s) {
         
         int before=0;
