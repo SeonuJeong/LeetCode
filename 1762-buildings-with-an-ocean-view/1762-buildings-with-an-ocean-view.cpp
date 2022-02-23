@@ -1,17 +1,19 @@
 class Solution {
 public:
     vector<int> findBuildings(vector<int>& heights) {
+        int n = heights.size();
+        vector<int> answer;
         
-        int mx=INT_MIN;
-        vector<int> result;
-        for(int i=heights.size()-1 ; i>=0; i--){
-            if(heights[i]>mx)
-                result.push_back(i);
-            
-            mx = max(mx,heights[i]);
+        for (int current = 0; current < n; ++current) {
+            // If the current building is taller, 
+            // it will block the shorter building's ocean view to its left.
+            // So we pop all the shorter buildings that have been added before.
+            while (!answer.empty() && heights[answer.back()] <= heights[current]) {
+                answer.pop_back();
+            }
+            answer.push_back(current);
         }
         
-        reverse(result.begin(), result.end());
-        return result;
+        return answer;
     }
 };
