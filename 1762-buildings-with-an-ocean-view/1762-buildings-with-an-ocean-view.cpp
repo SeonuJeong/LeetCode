@@ -3,17 +3,20 @@ public:
     vector<int> findBuildings(vector<int>& heights) {
         int n = heights.size();
         vector<int> answer;
+        int maxHeight = -1;
         
-        for (int current = 0; current < n; ++current) {
-            // If the current building is taller, 
-            // it will block the shorter building's ocean view to its left.
-            // So we pop all the shorter buildings that have been added before.
-            while (!answer.empty() && heights[answer.back()] <= heights[current]) {
-                answer.pop_back();
+        for (int current = n - 1; current >= 0; --current) {
+            // If there is no building higher (or equal) than the current one to its right,
+            // push it in the answer array.
+            if (maxHeight < heights[current]) {
+                answer.push_back(current);
+                
+                // Update the max building till now.
+                maxHeight = heights[current];
             }
-            answer.push_back(current);
         }
         
+        reverse(answer.begin(), answer.end());
         return answer;
     }
 };
