@@ -1,8 +1,6 @@
 class Solution {
 public:
     
-    unordered_map<int,vector<string>> um;
-    
     vector<vector<string>> output;
     string s;
     vector<vector<string>> partition(string s) {
@@ -24,9 +22,11 @@ public:
             if(!checkPalindrome(index, i)) continue;
             
             result.push_back(s.substr(index,i-index+1));
-    
+            
+            
             dfs(i+1,result);
-                
+        
+            
             result.pop_back();
         }
         
