@@ -1,41 +1,30 @@
 class Solution {
 public:
     
-    int dir[2][2] ={{1,0}, {0,1}};
-    int M,N;
-    vector<vector<int>> grid;
-    vector<vector<int>> cache;
+    int M,N; 
     
     int minPathSum(vector<vector<int>>& grid) {
         
-        this->grid=grid;
         M=grid.size(); N=grid[0].size();
-        cache.assign(M,vector<int>(N,-1));
+        vector<vector<int>> dp(M,vector<int>(N,0));
+        dp[M-1][N-1] = grid[M-1][N-1];
         
-        return dp(0,0);
-    }
-    
-    int dp(int y, int x){
-        if(y==M-1 && x==N-1)
-            return grid[y][x];
+        for(int x=N-2; x>=0; x--){
+            dp[M-1][x] = grid[M-1][x] + dp[M-1][x+1];
+        }
         
+        for(int y=M-2; y>=0; y--){
+            dp[y][N-1] = grid[y][N-1] + dp[y+1][N-1];
+        }
         
-        if(cache[y][x]!=-1)
-            return cache[y][x];
-        
-        int path = INT_MAX;
-        for(int i=0; i<2; i++){
-            int row = y+dir[i][0];
-            int col = x+dir[i][1];
-            
-            if(row>=0&&row<M&&col>=0&&col<N){
-                path = min(path,grid[y][x]+dp(row,col));
+        for(int y=M-2; y>=0; y--){
+            for(int x=N-2; x>=0; x--){
+                dp[y][x] = grid[y][x] + min(dp[y+1][x],dp[y][x+1]);
             }
         }
         
-        cache[y][x]=path;
-        
-        return path;
-        
+        return dp[0][0];
     }
+    
+    
 };
