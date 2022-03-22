@@ -14,8 +14,7 @@ public:
             
             
             if(nf > ol){
-                vector<int> v = {of, ol};
-                result.push_back(v);
+                result.push_back(intervals[i]);
                 i++;
             }
             else{
@@ -50,10 +49,7 @@ public:
         result.push_back(overlap);
         
         for( ; i<intervals.size();i++){
-            int of = intervals[i][0];
-            int ol = intervals[i][1];
-            vector<int> v = {of, ol};
-            result.push_back(v);
+            result.push_back(intervals[i]);
         }
         
         return result;
