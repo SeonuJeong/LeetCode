@@ -7,6 +7,7 @@ public:
         this->nums = nums;
         cache.assign(target+1,-1);
         
+        sort(nums.begin(), nums.end());
         return combination(target);
     }
     
