@@ -7,7 +7,6 @@ public:
         this->nums = nums;
         cache.assign(target+1,-1);
         
-        sort(nums.begin(), nums.end());
         return combination(target);
     }
     
@@ -16,8 +15,7 @@ public:
         if(curTotal==0){
             return 1;
         }
-        
-        if(curTotal<0)
+        else if(curTotal<0)
             return 0;
         
         if(cache[curTotal]!=-1)
