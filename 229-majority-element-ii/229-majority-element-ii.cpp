@@ -2,17 +2,25 @@ class Solution {
 public:
     //0855
     vector<int> majorityElement(vector<int>& nums) {
-        unordered_map<int,int> um;
-        
-        for(int i=0; i<nums.size(); i++){
-            um[nums[i]] += 1;
-        }
+        sort(nums.begin(), nums.end());
         
         int more = nums.size()/3;
+        
+        int count=0;
         vector<int> result;
-        for(unordered_map<int,int>::iterator it=um.begin(); it!=um.end(); it++){
-            if(it->second > more)
-                result.push_back(it->first);
+        for(int i=0; i<nums.size(); i++){
+            if(i!=0 && nums[i]!=nums[i-1])
+                count=1;
+            else
+                count++;
+            
+            if(count<=more)
+                continue;
+            
+            result.push_back(nums[i]);
+            
+            while(i+1<nums.size()&&nums[i+1]==nums[i])
+                i++;
         }
         
         return result;
