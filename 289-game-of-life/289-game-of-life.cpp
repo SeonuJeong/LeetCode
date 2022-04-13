@@ -29,7 +29,7 @@ public:
     void changeCell(int y,int x, vector<vector<int>>& board){
         
         bool isLive = false;
-        if(board[y][x]==1 || board[y][x]==-2)
+        if(board[y][x]==1)
             isLive = true;
         
         int liveCount=0;
