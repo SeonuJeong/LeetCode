@@ -24,7 +24,6 @@ public:
         
         int count=0;
         for(int i=0; i<longest.length(); i++){
-            
             if(situ!=2&&longest[i]!=shortest[i-count]){
                 count++;
             }
