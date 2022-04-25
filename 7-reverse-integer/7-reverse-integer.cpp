@@ -1,30 +1,39 @@
 class Solution {
-public:
+public://0920
     int reverse(int x) {
-        int sign=1;
-        int maxNum = INT_MAX;
-        if(x<0){
-            sign=-1;
-            maxNum = INT_MIN;
-        } 
+        
+        if(x==0)
+            return 0;
+        
+        bool isPositive = x>0;
         
         
-        int reves = 0;
-        int digit=1;
-        
+        int curVal=0;
         while(x!=0){
-            digit = x%10; x=x/10;
+            int mrv;
             
-            if(sign==1 && ((maxNum-digit)/10 < reves))
-                return 0;
-            else if(sign==-1 && ((maxNum-digit)/10>reves))
-                return 0;
+            if(isPositive)
+                mrv = x%10;
+            else
+                mrv = (10-(x%10))%10;
             
-            reves *= 10;
-            reves += digit;
+            x = x/10;
             
+            if(isPositive){
+                if((INT_MAX-mrv)/10>=curVal)
+                    curVal = curVal*10+mrv;
+                else
+                    return 0;
+            }
+            else{
+                if((INT_MIN+mrv)/(10)<=curVal)
+                    curVal = curVal*10-mrv;
+                else
+                    return 0;
+            }
         }
         
-        return reves;
+        
+        return curVal;
     }
 };
