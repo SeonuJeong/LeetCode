@@ -3,15 +3,12 @@ public:
     //1000
     int lengthOfLongestSubstring(string s) {
         
-        if(s.length()==0)
-            return 0;
-        
+
         unordered_map<char,int> seen;
-        int maxlen=1;
+        int maxlen=0;
         int le=0;
-        seen[s[le]]=0;
         
-        for(int ri=1; ri<s.length();ri++){
+        for(int ri=0; ri<s.length();ri++){
             
             if(seen.find(s[ri])==seen.end()||seen[s[ri]]==-1){
                 seen[s[ri]]=ri;
