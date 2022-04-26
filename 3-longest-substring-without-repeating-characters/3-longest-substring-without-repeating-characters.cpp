@@ -1,22 +1,33 @@
 class Solution {
 public:
+    //1000
     int lengthOfLongestSubstring(string s) {
-        map<char,int> m;
-        int le=0, ri=0;
-        int mx=0;
-        while(ri<s.length()){
-            map<char,int>::iterator it = m.find(s[ri]);
-            if(it!=m.end()){ 
-                le = max(le,it->second+1);
-                it->second = ri;
+        
+        if(s.length()==0)
+            return 0;
+        
+        unordered_map<char,int> seen;
+        int maxlen=1;
+        int le=0;
+        seen[s[le]]=0;
+        
+        for(int ri=1; ri<s.length();ri++){
+            
+            if(seen.find(s[ri])==seen.end()||seen[s[ri]]==-1){
+                seen[s[ri]]=ri;
+                maxlen = max(maxlen,ri-le+1);
+                continue;
             }
-            else
-                m.insert(pair<char,int>(s[ri],ri));
-   
-            mx = max(mx, ri-le+1);
-            ri++;
+            
+            int target = seen[s[ri]];
+            
+            while(le<=target){
+                seen[s[le++]]=-1;
+            }
+            seen[s[ri]]=ri;
         }
         
-        return mx;
+        
+        return maxlen;
     }
 };
