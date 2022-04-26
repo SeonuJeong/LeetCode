@@ -1,52 +1,30 @@
 class Solution {
 public:
-    //0710
-    
-    vector<int> nums;
-    vector<vector<int>> result;
-    
     vector<vector<int>> threeSum(vector<int>& nums) {
-        if(nums.size()<3)
-            return result;
+        set<vector<int>> res;
+        unordered_set<int> dup;
+        unordered_map<int,int> seen;
         
-        sort(nums.begin(),nums.end());
-        this->nums = nums;
-        
-        
-        for(int i=0; i<nums.size()-2&&nums[i]<=0 ; i++){
-            if(i!=0 && nums[i]==nums[i-1])
-                continue;
+        for(int i=0; i<nums.size(); i++){
             
-            
-            twoSum(i,-1*nums[i]);
-        }
-        
-        return result;
-    }
-    
-    
-    void twoSum(int pos, int target){
-        
-        int le=pos+1;
-        int ri=nums.size()-1;
-        
-        
-        while(le<ri){
-            int sum= nums[le]+nums[ri];
-            if(sum==target){
-                result.push_back({nums[pos],nums[le++],nums[ri]});
-               
-                while(le<ri&&nums[le]==nums[le-1]){
-                        le++;
+            if(dup.insert(nums[i]).second){
+                for(int j=i+1; j<nums.size(); j++){
+                    int complement = -nums[i]-nums[j];
+                    
+                    auto it = seen.find(complement);
+                    
+                    if(it!=seen.end() && it->second==i){
+                        vector<int> tmp = {complement,nums[i],nums[j]};
+                        sort(tmp.begin(), tmp.end());
+                        res.insert(tmp);
+                    }
+                    
+                    seen[nums[j]]=i;
                 }
-            }
-            else if(sum<target){
-                le++;
-            }
-            else{
-                ri--;
+                
             }
         }
+        
+        return vector<vector<int>> (res.begin(),res.end());
     }
-    
 };
