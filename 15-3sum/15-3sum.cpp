@@ -13,9 +13,10 @@ public:
         this->nums = nums;
         
         
-        for(int i=0; i<nums.size()-2 ; i++){
+        for(int i=0; i<nums.size()-2&&nums[i]<=0 ; i++){
             if(i!=0 && nums[i]==nums[i-1])
                 continue;
+            
             
             twoSum(i,-1*nums[i]);
         }
@@ -33,15 +34,9 @@ public:
         while(le<ri){
             int sum= nums[le]+nums[ri];
             if(sum==target){
-                vector<int> output;
-                output={nums[pos],nums[le],nums[ri]};
-                result.push_back(output);
-                
-                le++;
-                while(le<ri){
-                    if(nums[le]!=nums[le-1])
-                        break;
-                    else
+                result.push_back({nums[pos],nums[le++],nums[ri]});
+               
+                while(le<ri&&nums[le]==nums[le-1]){
                         le++;
                 }
             }
