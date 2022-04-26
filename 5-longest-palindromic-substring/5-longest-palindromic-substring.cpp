@@ -1,69 +1,48 @@
 class Solution {
 public:
-    // 05:01
-    // 06:16
-    vector<vector<int>> cache;
-    string s;
-    string output="";
-    int longlen=0;
-    string longestPalindrome(string s) {
-        cache.assign(s.length(), vector<int>(s.length(),0));
-        this->s = s;
-        
-        for(int i=0; i<s.length(); i++){
-            dp(0,i);
-        }
-        
-        return output;
-    }
     
-    int dp(int left, int right){
+    int longest;
+    string result="";
+    string s;
+    vector<vector<int>> cache;
+    string longestPalindrome(string s) {
+        this->s = s;
+        cache.assign(s.length(),vector<int>(s.length(),-1));
         
+        palindrome(0,s.length()-1);
         
-        if(left > right){
-            return 1;
-        }
-        
-        if(left==right){
-            if(output.length() < 1)
-                output = s.substr(left,1);
-            
-            return 1;
-        }
-        
-        if(cache[left][right]!=0){
-            return cache[left][right];
-        }
-        
-        int result=-1;
-        for(int i=left; i<=right-longlen; i++){
-            if(s[i]==s[right]){
-                if(dp2(i+1, right-1)>0){
-                    result= right-i+1;
-                    if(output.length() < s.substr(i,right-i+1).length()){
-                        output = s.substr(i,right-i+1);
-                        longlen = output.length();
-                    }
-                    break;
-                }
-            }
-        }
-        
-        cache[left][right] = result;
         return result;
     }
     
-    
-    int dp2(int left,int right){
+    int palindrome(int le,int ri){
         
-        if(left==right) return 1;
-        if(left>right) return 1;
+        if(le>ri){
+            return 1;
+        }
+        else if(le==ri){
+            if(longest==0){
+                longest=1;
+                result = s[le];
+            }
+            return 1; 
+        }
         
-        if(s[left]==s[right]){
-            return dp2(left+1,right-1);
+        if(cache[le][ri]!=-1)
+            return cache[le][ri];
+        
+        if(palindrome(le+1,ri-1)&&s[le]==s[ri]){
+            if(longest<(ri-le+1)){
+                longest = ri-le+1;
+                result = s.substr(le,ri-le+1);
+            } 
+            
+            cache[le][ri]=1;
+            return 1;
         }
-        else{
-            return -1;
-        }
+        
+        palindrome(le+1,ri)||palindrome(le,ri-1);
+        cache[le][ri]=0;
+        return 0;
     }
+    
 };
