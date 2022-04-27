@@ -1,36 +1,37 @@
 class Solution {
-public:
+public://0830
     bool checkValidString(string s) {
-     
-        vector<int> left;
+        vector<int> paren;
         vector<int> star;
+        
         
         for(int i=0; i<s.length(); i++){
             
-            if(s[i]=='(')
-                left.push_back(i);
-            else if(s[i]=='*')
-                star.push_back(i);
+            if(s[i]=='('){
+                paren.push_back(i);
+            }
             else if(s[i]==')'){
-                if(!left.empty()) left.pop_back();
-                else if(!star.empty()) star.pop_back();
-                else return false;
+                if(!paren.empty())
+                    paren.pop_back();
+                else if(!star.empty())
+                    star.pop_back();
+                else
+                    return false;
             }
-            
-            
+            else if(s[i]=='*'){
+                star.push_back(i);
+            }
         }
         
-        while(!left.empty()){
-            if(!star.empty() && left.back()<star.back()){
-                left.pop_back();
+        
+        for(int i=paren.size()-1; i>=0; i--){
+            if(!star.empty()&&paren[i]<star.back())
                 star.pop_back();
-            }
-            else{
-                break;
-            }
+            else
+                return false;
         }
         
-        if(left.empty()) return true;
-        else return false;
+        return true;
+        
     }
 };
